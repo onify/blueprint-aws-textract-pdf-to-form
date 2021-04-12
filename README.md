@@ -17,13 +17,19 @@ Amazon Textract is a machine learning service that automatically extracts text, 
 
 ### PDF
 
+Here is a example of the PDF files that are in the "inbox".
+
 ![alt text](/screenshots/pdf.png "PDF")
 
 ### AWS Textract
 
+Here is how Amazon Textract sees the PDF as a form.
+
 ![alt text](/screenshots/textract.png "AWS Textract")
 
 ### Form
+
+Here is how the data ends up in the form in Onify.
 
 ![alt text](/screenshots/form.png "Form")
 
