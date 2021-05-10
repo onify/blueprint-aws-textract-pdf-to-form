@@ -37,7 +37,7 @@ Here is how the data ends up in the form in Onify.
 
 ## Requirements
 
-* Onify Hub v2
+* Onify Hub API 2.3.0 or later
 * Mail configured in Onify Hub
 * Onify Agent (tagged `agent`)
 * Onify Flow license

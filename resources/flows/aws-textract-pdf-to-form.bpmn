@@ -29,7 +29,7 @@
           <camunda:connectorId>onifyApiRequest</camunda:connectorId>
         </camunda:connector>
         <camunda:inputOutput>
-          <camunda:inputParameter name="inboxPath">/src/blueprint-aws-textract/inbox/</camunda:inputParameter>
+          <camunda:inputParameter name="inboxPath">/temp/inbox/</camunda:inputParameter>
           <camunda:outputParameter name="inboxFiles">
             <camunda:script scriptFormat="js">next(null, JSON.parse(content.output.body.result.response));</camunda:script>
           </camunda:outputParameter>
@@ -76,6 +76,9 @@
           <camunda:inputOutput>
             <camunda:inputParameter name="bucket">my-bucket</camunda:inputParameter>
           </camunda:inputOutput>
+          <camunda:properties>
+            <camunda:property name="alert_stateid" value="waitForUpload" />
+          </camunda:properties>
         </bpmn:extensionElements>
         <bpmn:incoming>Flow_0jp20nu</bpmn:incoming>
         <bpmn:outgoing>Flow_1jikwh3</bpmn:outgoing>
@@ -91,7 +94,7 @@
         </bpmn:extensionElements>
         <bpmn:incoming>Flow_1jikwh3</bpmn:incoming>
         <bpmn:outgoing>Flow_14zfcxk</bpmn:outgoing>
-        <bpmn:messageEventDefinition id="MessageEventDefinition_06pu57z" messageRef="Message_1n91469" />
+        <bpmn:messageEventDefinition id="MessageEventDefinition_06pu57z" />
       </bpmn:intermediateCatchEvent>
       <bpmn:sequenceFlow id="Flow_14zfcxk" sourceRef="waitForUpload" targetRef="textractFile" />
       <bpmn:serviceTask id="textractFile" name="Process file with AWS Textract">
@@ -125,6 +128,9 @@
             <camunda:inputParameter name="snsTopicArn">arn:aws:sns:eu-central-1:1234567890:AmazonTextract</camunda:inputParameter>
             <camunda:inputParameter name="roleArn">arn:aws:iam::1234567890:role/Textract</camunda:inputParameter>
           </camunda:inputOutput>
+          <camunda:properties>
+            <camunda:property name="alert_stateid" value="waitForTextract" />
+          </camunda:properties>
         </bpmn:extensionElements>
         <bpmn:incoming>Flow_14zfcxk</bpmn:incoming>
         <bpmn:outgoing>Flow_1wx33ud</bpmn:outgoing>
@@ -139,7 +145,7 @@
         </bpmn:extensionElements>
         <bpmn:incoming>Flow_1wx33ud</bpmn:incoming>
         <bpmn:outgoing>Flow_0u1xd4q</bpmn:outgoing>
-        <bpmn:messageEventDefinition id="MessageEventDefinition_0ufrssp" messageRef="Message_1wrb98a" />
+        <bpmn:messageEventDefinition id="MessageEventDefinition_0ufrssp" />
       </bpmn:intermediateCatchEvent>
       <bpmn:sequenceFlow id="Flow_1wx33ud" sourceRef="textractFile" targetRef="waitForTextract" />
       <bpmn:sequenceFlow id="Flow_0u1xd4q" sourceRef="waitForTextract" targetRef="sendMail" />
@@ -223,15 +229,13 @@ next(null, payload);</camunda:script>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0pqe9u6" sourceRef="getInboxFiles" targetRef="TextAnnotation_1r7a85n" />
   </bpmn:process>
-  <bpmn:message id="Message_1n91469" name="uploadFile" />
-  <bpmn:message id="Message_1wrb98a" name="textractFile" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="aws-textract-pdf-to-form">
       <bpmndi:BPMNEdge id="Flow_0hlhc7r_di" bpmnElement="Flow_0hlhc7r">
         <di:waypoint x="1100" y="395" />
-        <di:waypoint x="1100" y="492" />
+        <di:waypoint x="1100" y="493" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1110" y="406" width="80" height="27" />
+          <dc:Bounds x="1111" y="406" width="79" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1rpcyl1_di" bpmnElement="Flow_1rpcyl1">
@@ -255,11 +259,14 @@ next(null, payload);</camunda:script>
       <bpmndi:BPMNShape id="Activity_1o3gpkz_di" bpmnElement="getInboxFiles">
         <dc:Bounds x="250" y="237" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_108kc9w_di" bpmnElement="Event_0xaf885">
+        <dc:Bounds x="1082" y="493" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1080" y="536" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0098w5p_di" bpmnElement="subProcess" isExpanded="true">
         <dc:Bounds x="410" y="140" width="950" height="237" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_0alvspr_di" bpmnElement="TextAnnotation_0alvspr">
-        <dc:Bounds x="910" y="170" width="200" height="40" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_19xhnbd_di" bpmnElement="Flow_19xhnbd">
         <di:waypoint x="1190" y="277" />
@@ -324,6 +331,9 @@ next(null, payload);</camunda:script>
       <bpmndi:BPMNShape id="TextAnnotation_1e5ta3i_di" bpmnElement="TextAnnotation_1e5ta3i">
         <dc:Bounds x="1130" y="168" width="180" height="43" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0alvspr_di" bpmnElement="TextAnnotation_0alvspr">
+        <dc:Bounds x="910" y="170" width="200" height="40" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_0f4ul5w_di" bpmnElement="Association_0f4ul5w">
         <di:waypoint x="633" y="238" />
         <di:waypoint x="663" y="210" />
@@ -340,12 +350,6 @@ next(null, payload);</camunda:script>
         <dc:Bounds x="162" y="259" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="141" y="302" width="80" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_108kc9w_di" bpmnElement="Event_0xaf885">
-        <dc:Bounds x="1082" y="492" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1080" y="535" width="40" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_1r7a85n_di" bpmnElement="TextAnnotation_1r7a85n">
