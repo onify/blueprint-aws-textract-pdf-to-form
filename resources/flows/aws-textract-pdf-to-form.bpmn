@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1f0d8hv" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.5.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1f0d8hv" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
   <bpmn:process id="aws-textract-pdf-to-form" name="Onify Blueprint: Amazon AWS Textract - PDF to form example" isExecutable="true">
     <bpmn:sequenceFlow id="Flow_1bxo516" sourceRef="startEvent" targetRef="getInboxFiles" />
     <bpmn:endEvent id="endEvent" name="Done processing files">
@@ -259,14 +259,11 @@ next(null, payload);</camunda:script>
       <bpmndi:BPMNShape id="Activity_1o3gpkz_di" bpmnElement="getInboxFiles">
         <dc:Bounds x="250" y="237" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_108kc9w_di" bpmnElement="Event_0xaf885">
-        <dc:Bounds x="1082" y="493" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1080" y="536" width="40" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0098w5p_di" bpmnElement="subProcess" isExpanded="true">
         <dc:Bounds x="410" y="140" width="950" height="237" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1e5ta3i_di" bpmnElement="TextAnnotation_1e5ta3i">
+        <dc:Bounds x="1160" y="168" width="160" height="43" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_19xhnbd_di" bpmnElement="Flow_19xhnbd">
         <di:waypoint x="1190" y="277" />
@@ -328,28 +325,31 @@ next(null, payload);</camunda:script>
       <bpmndi:BPMNShape id="TextAnnotation_0y1eq9m_di" bpmnElement="TextAnnotation_0y1eq9m">
         <dc:Bounds x="640" y="170" width="150" height="40" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1e5ta3i_di" bpmnElement="TextAnnotation_1e5ta3i">
-        <dc:Bounds x="1130" y="168" width="180" height="43" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0alvspr_di" bpmnElement="TextAnnotation_0alvspr">
-        <dc:Bounds x="910" y="170" width="200" height="40" />
+        <dc:Bounds x="910" y="170" width="230" height="40" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_0f4ul5w_di" bpmnElement="Association_0f4ul5w">
         <di:waypoint x="633" y="238" />
         <di:waypoint x="663" y="210" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1d1a7ix_di" bpmnElement="Association_1d1a7ix">
-        <di:waypoint x="1142" y="237" />
-        <di:waypoint x="1160" y="211" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_1ou781c_di" bpmnElement="Association_1ou781c">
-        <di:waypoint x="903" y="238" />
-        <di:waypoint x="933" y="210" />
+        <di:waypoint x="906" y="239" />
+        <di:waypoint x="940" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1d1a7ix_di" bpmnElement="Association_1d1a7ix">
+        <di:waypoint x="1156" y="237" />
+        <di:waypoint x="1183" y="211" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_0pzss2w_di" bpmnElement="startEvent">
         <dc:Bounds x="162" y="259" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="141" y="302" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_108kc9w_di" bpmnElement="Event_0xaf885">
+        <dc:Bounds x="1082" y="493" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1080" y="536" width="40" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_1r7a85n_di" bpmnElement="TextAnnotation_1r7a85n">

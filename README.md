@@ -10,12 +10,10 @@ Example how to 1) upload files to AWS S3 and 2) process the PDF file via AWS Tex
  
 Amazon Textract is a machine learning service that automatically extracts text, handwriting and data from scanned documents that goes beyond simple optical character recognition (OCR) to identify, understand, and extract data from forms and tables. Read more: https://aws.amazon.com/textract/.
 
+![Onify Blueprint: Amazon AWS Textract - PDF to form example](blueprint.jpg "Blueprint")
+
 
 ## Screenshots
-
-### Onify Flow
-
-![alt text](/screenshots/flow.png "Onify Flow")
 
 ### PDF
 
@@ -34,6 +32,10 @@ Here is how Amazon Textract sees the PDF as a form.
 Here is how the data ends up in the form in Onify.
 
 ![alt text](/screenshots/form.png "Form")
+
+### Onify Flow
+
+![alt text](/screenshots/flow.png "Onify Flow")
 
 ## Requirements
 
